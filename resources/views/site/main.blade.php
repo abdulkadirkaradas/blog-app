@@ -1,8 +1,8 @@
 @extends("layouts.admin")
 @section("content")
 
-<div class="container">
-    <div class="title">Gülşah Karadaş</div>
+<div class="container" id="main-app">
+    <main-app></main-app>
 </div>
 
 @endsection
@@ -10,8 +10,7 @@
 @section('scripts')
 @parent
 
-<script>
-</script>
+    @vite('resources/js/app.js')
 
 @endsection
 
@@ -22,19 +21,6 @@
     html, body {
         width: 100%;
         height: 100%;
-    }
-
-    .container {
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
-
-    .container .title {
-        text-align: center;
-        font-size: 75px;
     }
 </style>
 

@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "watch": "vite build --watch"
     },
     "devDependencies": {
         "axios": "^1.1.2",
@@ -15,6 +16,7 @@
         "webpack": "^5.75.0"
     },
     "dependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
         "jquery": "^3.6.3",
         "jquery-ui": "^1.13.2",
         "vue": "^3.2.36",
