@@ -1,8 +1,8 @@
 @extends("layouts.site")
 @section("content")
 
-<div class="page-container" id="main-app">
-    <main-app></main-app>
+<div class="page-container" id="site-app">
+    <site-app></site-app>
 </div>
 
 @endsection
