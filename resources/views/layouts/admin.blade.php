@@ -14,7 +14,6 @@
     @yield("styles")
 </head>
 <body>
-    @include("partials.menu")
     @yield("content")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>

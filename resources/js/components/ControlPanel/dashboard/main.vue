@@ -1,14 +1,14 @@
 <template>
     <div class="main-container">
         <div class="menu-container">
-            <Menu></Menu>
+            <Menu @action="getAction"></Menu>
         </div>
         <div class="main-content">
             <div class="header-container">
                 <Header></Header>
             </div>
             <div class="content-container">
-                <Content></Content>
+                <Content :selectedAction="selectedAction"></Content>
             </div>
         </div>
     </div>
@@ -19,6 +19,16 @@ import Menu from "./Menu/menu.vue";
 import Header from './Header/header.vue';
 import Content from './Content/content.vue';
 export default {
+    data() {
+        return {
+            selectedAction: null
+        }
+    },
+    methods: {
+        getAction(page) {
+            this.selectedAction = page;
+        }
+    },
     components: {
         Menu, Header, Content
     }
@@ -36,6 +46,7 @@ export default {
             left: 0;
             width: 12vw;
             height: 100%;
+            padding: 0.5vw;
 
             justify-content: center;
             display: flex;
@@ -49,12 +60,12 @@ export default {
             right: 0;
 
             & .header-container {
-                padding: 0.5vw;
+                padding: 1vw;
             }
 
             & .content-container {
                 width: 100%;
-                padding: 0.5vw;
+                padding: 1vw;
                 float: right;
                 position: relative;
             }

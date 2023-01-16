@@ -1,7 +1,6 @@
 <template>
-    <div class="card">
-        <div class="card-header">Dashboard</div>
-        <div class="card-body"></div>
+    <div class="header">
+        <div class="title">Dashboard</div>
     </div>
 </template>
 
@@ -12,6 +11,18 @@ export default {
 </script>
 
 <style lang="scss">
-    // .header {
-    // }
+    .header {
+        background: #f2f2f2;
+        overflow: hidden;
+        border-radius: 1vw;
+        box-shadow: 0 0 0.25vw #d0d0d0;
+
+        & .title {
+            font-size: 1.3vw;
+            text-align: justify;
+            color: black;
+            padding: 1vw;
+            text-align: center;
+        }
+    }
 </style>
