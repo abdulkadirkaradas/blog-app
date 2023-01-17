@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="submit-area unselect">
-                <div class="submit">Kaydet</div>
+                <div class="submit" @click="serializeForm">Kaydet</div>
             </div>
         </form>
     </div>
@@ -40,7 +40,7 @@ export default {
     },
     data() {
         return {
-
+            file: null,
         }
     },
     mounted() {
@@ -64,8 +64,25 @@ export default {
                 imageGroup.style.borderLeft = "0.05vw solid black";
                 imageGroup.style.borderRight = "0.05vw solid black";
 
+                this.file = event.target.files[0];
+
                 this.$emit("status", "opened");
             }
+        },
+        serializeForm() {
+            var name = $("#name").val();
+            var flag = this.actionType;
+            var description = tinymce.activeEditor.getContent();
+
+            let formData = new FormData();
+            formData.append("name", name);
+            formData.append("flag", flag);
+            formData.append("detail", description);
+            formData.append("image", this.file);
+
+            axios.post(`/admin/store-design`, formData).then(function(response) {
+                console.log(response);
+            });
         }
     },
     components: {

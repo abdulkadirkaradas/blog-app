@@ -31,5 +31,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/update-design', [DesignsController::class, "update"]);
     Route::post('/delete-design', [DesignsController::class, "delete"]);
     Route::get('/find-design', [DesignsController::class, "findDesign"]);
-    Route::get('/get-all-design', [DesignsController::class, "getAllDesigns"]);
+    Route::get('/get-all-designs', [DesignsController::class, "getAllDesigns"]);
+
+    // Bag Routes
+    Route::post('/store-bag', [DesignsController::class, "store"]);
+    Route::post('/update-bag', [DesignsController::class, "update"]);
+    Route::post('/delete-bag', [DesignsController::class, "delete"]);
+    Route::get('/find-bag', [DesignsController::class, "findBags"]);
+    Route::get('/get-all-bags', [DesignsController::class, "getAllBags"]);
+
+    // Blog Routes
+    Route::post('/store-blog', [DesignsController::class, "store"]);
+    Route::post('/update-blog', [DesignsController::class, "update"]);
+    Route::post('/delete-blog', [DesignsController::class, "delete"]);
+    Route::get('/find-blog', [DesignsController::class, "findBlog"]);
+    Route::get('/get-all-blog', [DesignsController::class, "getAllBlogs"]);
 });

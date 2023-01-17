@@ -15,7 +15,7 @@ class DesignsController extends Controller
     {
         $design = new Topics();
         $design->name = $request->name;
-        $design->flag = "design";
+        $design->flag = $request->flag;
         $design->save();
 
         $detail = new TopicDetails();
@@ -23,7 +23,7 @@ class DesignsController extends Controller
         $detail->topic_id = $design->id;
         $detail->save();
 
-        $file = $request->file("images");
+        $file = $request->file("image");
         $fileId = Str::uuid();
         if($file) {
             $fileName = $file->getClientOriginalName();

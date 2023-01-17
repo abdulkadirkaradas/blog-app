@@ -16,7 +16,7 @@ class BlogController extends Controller
     {
         $blog = new Topics();
         $blog->name = $request->name;
-        $blog->flag = "blog";
+        $blog->flag = $request->flag;
         $blog->save();
 
         $detail = new TopicDetails();
@@ -24,7 +24,7 @@ class BlogController extends Controller
         $detail->topic_id = $blog->id;
         $detail->save();
 
-        $file = $request->file("images");
+        $file = $request->file("image");
         $fileId = Str::uuid();
         if($file) {
             $fileName = $file->getClientOriginalName();

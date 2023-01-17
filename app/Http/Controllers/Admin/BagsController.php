@@ -16,7 +16,7 @@ class BagsController extends Controller
     {
         $bag = new Topics();
         $bag->name = $request->name;
-        $bag->flag = "bag";
+        $bag->flag = $request->flag;
         $bag->save();
 
         $detail = new TopicDetails();
@@ -24,7 +24,7 @@ class BagsController extends Controller
         $detail->topic_id = $bag->id;
         $detail->save();
 
-        $file = $request->file("images");
+        $file = $request->file("image");
         $fileId = Str::uuid();
         if($file) {
             $fileName = $file->getClientOriginalName();
