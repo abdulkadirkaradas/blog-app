@@ -9,9 +9,7 @@
 
 @section('scripts')
 @parent
-
     @vite('resources/js/app.js')
-
 @endsection
 
 @section('styles')

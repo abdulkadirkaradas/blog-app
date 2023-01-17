@@ -12,10 +12,11 @@ export default {
 
 <style lang="scss">
     .header {
-        background: #f2f2f2;
-        overflow: hidden;
-        border-radius: 1vw;
-        box-shadow: 0 0 0.25vw #d0d0d0;
+        padding: 0.5vw;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0.1vw solid rgba(0, 0, 0, 0.1254901961);
+        border-radius: 0.7vw;
 
         & .title {
             font-size: 1.3vw;

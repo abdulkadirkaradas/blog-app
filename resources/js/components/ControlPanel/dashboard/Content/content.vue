@@ -3,9 +3,9 @@
         <div class="body">
             <div class="components" v-if="selectedAction != null && selectedAction != 'dashboard'">
                 <div class="button">
-                    <div class="question unselect" v-on:click="showCreatePage()">{{ selectedAction }} Ekle</div>
+                    <div class="question unselect" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
                 </div>
-                <Create v-if="IsCreateShow == true"></Create>
+                <Create v-if="IsCreateShow == true" :actionType="selectedAction" ></Create>
                 <Index v-if="IsIndexShow == true"></Index>
             </div>
             <div class="dboard" v-if="selectedAction == 'dashboard'">
@@ -15,24 +15,37 @@
 </template>
 
 <script>
-import Create from './Designs/create.vue';
-import Index from './Designs/index.vue';
+import Create from './Topics/create.vue';
+import Index from './Topics/index.vue';
 export default {
+    props: {
+        selectedAction: null,
+    },
     data () {
         return {
             IsCreateShow: false,
             IsIndexShow: true,
+            nameArray: {
+                "designs": "Tasarım",
+                "bags": "Çanta",
+                "blogs": "Blog",
+                "manageSM": "SM",
+            },
+            index: 0,
         }
-    },
-    props: {
-        selectedAction: null,
     },
     methods: {
         showCreatePage() {
             this.IsCreateShow = true;
             this.IsIndexShow = false;
-
-            console.log(this.IsCreateShow, this.IsIndexShow);
+        }
+    },
+    watch:  {
+        selectedAction(nev, old) {
+            if(nev != old) {
+                this.IsCreateShow = false;
+                this.IsIndexShow = true;
+            }
         }
     },
     components: {
@@ -43,19 +56,25 @@ export default {
 
 <style lang="scss">
     .content {
-        background: #f2f2f2;
+        padding: 0.5vw;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0.1vw solid rgba(0, 0, 0, 0.1254901961);
+        border-radius: 0.7vw;
         overflow: hidden;
-        border-radius: 1vw;
-        box-shadow: 0 0 0.25vw #d0d0d0;
 
         & .body {
             text-align: justify;
             color: black;
             padding: 1.2vw;
 
+            display: flex;
+            flex-direction: column;
+
             & .components {
 
                 & .button {
+                    margin-bottom: 1vw;
                     justify-content: center;
                     align-items: center;
                     display: flex;
@@ -85,5 +104,4 @@ export default {
         -ms-user-select: none;
         user-select: none;
     }
-
 </style>

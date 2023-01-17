@@ -24,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/6.2.10/js/tempus-dominus.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/8fmk9di8ca7dmkb3dz0kmjmv13q19k5qjnilymfnhk5jbwzj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @yield("scripts")
 </body>
 </html>
