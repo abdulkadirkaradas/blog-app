@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\DesignsController;
 use App\HTTP\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -45,5 +46,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/update-blog', [DesignsController::class, "update"]);
     Route::post('/delete-blog', [DesignsController::class, "delete"]);
     Route::get('/find-blog', [DesignsController::class, "findBlog"]);
-    Route::get('/get-all-blog', [DesignsController::class, "getAllBlogs"]);
+    Route::get('/get-all-blogs', [DesignsController::class, "getAllBlogs"]);
+
+    // Social Media
+    Route::post('/store-sm', [SocialMediaController::class, "store"]);
+    Route::post('/update-sm', [SocialMediaController::class, "update"]);
+    Route::post('/delete-sm', [SocialMediaController::class, "delete"]);
+    Route::get('/find-sm', [SocialMediaController::class, "findSM"]);
+    Route::get('/get-all-sm', [SocialMediaController::class, "getAllSMs"]);
 });

@@ -32,7 +32,7 @@ class SocialMediaController extends Controller
         ];
     }
 
-    public function findAllSM(Request $request)
+    public function getAllSMs(Request $request)
     {
         $sm = SocialMedia::all();
 

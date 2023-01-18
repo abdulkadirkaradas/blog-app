@@ -1,14 +1,14 @@
 <template>
     <div class="action-container">
         <form method="POST" id="store_form" enctype="multipart/form-data">
-            <div class="alignment">
+            <div class="alignment" v-if="actionType != 'socialmedia'">
                 <div class="left">
                     <div class="f-group">
                         <input type="text" id="name" placeholder="Lütfen isim giriniz!">
                     </div>
                     <!-- add flag -->
                     <div class="f-group-editor">
-                        <Editor :init="{plugins: ['wordcount', 'emoticons'], toolbar: ['emoticons']}"></Editor>
+                        <Editor api-key="8fmk9di8ca7dmkb3dz0kmjmv13q19k5qjnilymfnhk5jbwzj" :init="init"></Editor>
                     </div>
                 </div>
                 <div class="right">
@@ -23,20 +23,45 @@
                     </div>
                 </div>
             </div>
+            <div class="socialmedia" v-if="actionType == 'socialmedia'">
+                <div class="f-group">
+                    <label for="">Başlık</label>
+                    <input type="text" id="title">
+                </div>
+                <div class="f-group">
+                    <label for="">Açıklama</label>
+                    <textarea id="description" cols="60" rows="10"></textarea>
+                </div>
+                <div class="f-group">
+                    <label for="">URL</label>
+                    <input type="url" id="url" pattern="https://.*">
+                </div>
+            </div>
             <div class="submit-area unselect">
-                <div class="submit" @click="serializeForm">Kaydet</div>
+                <div class="submit" v-if="actionType != 'socialmedia'" @click="serializeForm">Kaydet</div>
+                <div class="submit" v-else @click="serializeSocialMedia">Kaydet</div>
             </div>
         </form>
     </div>
 </template>
 
 <script>
-import * as $ from "jquery";
+import $ from "jquery";
 import Editor from '@tinymce/tinymce-vue';
 import tinymce from "tinymce";
 export default {
     props: {
-        actionType: null
+        actionType: null,
+        init: {
+            plugins: {
+                type: [String, Array],
+                default: 'quickbars emoticons table',
+            },
+            toolbar: {
+                type: [String, Array],
+                default: ' bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify|bullist numlist |outdent indent blockquote | undo redo | axupimgs | removeformat | table | emoticons',
+            },
+        }
     },
     data() {
         return {
@@ -44,11 +69,13 @@ export default {
         }
     },
     mounted() {
-        tinymce.activeEditor.setContent("");
-        $("input").val();
-        $(".preview > img").remove();
-        $(".preview").append("<img id='image-preview'>");
-        $("#image-preview").attr("display", "none");
+        if(this.actionType != "socialmedia") {
+            tinymce.activeEditor.setContent("");
+            $("input").val("");
+            $(".preview > img").remove();
+            $(".preview").append("<img id='image-preview'>");
+            $("#image-preview").attr("display", "none");
+        }
     },
     methods: {
         showPreview(event) {
@@ -70,7 +97,7 @@ export default {
             }
         },
         serializeForm() {
-            var name = $("#name").val();
+            var name = document.getElementById("name").value;
             var flag = this.actionType;
             var description = tinymce.activeEditor.getContent();
 
@@ -81,7 +108,28 @@ export default {
             formData.append("image", this.file);
 
             axios.post(`/admin/store-design`, formData).then(function(response) {
+                // console.log(response);
+                tinymce.activeEditor.setContent("");
+                $("input").val("");
+                $(".preview > img").remove();
+                $(".preview").append("<img id='image-preview'>");
+                $("#image-preview").attr("display", "none");
+            });
+        },
+        serializeSocialMedia() {
+            var title = document.getElementById("title").value;
+            var description = document.getElementById("description").value;
+            var url = document.getElementById("url").value;
+
+            let formData = new FormData();
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("url", url);
+
+            axios.post(`/admin/store-sm`, formData).then(function(response) {
                 console.log(response);
+                $("input").val("");
+                $("textarea").val("");
             });
         }
     },
@@ -201,6 +249,54 @@ export default {
                 justify-content: center;
                 align-items: center;
                 display: flex;
+            }
+        }
+
+        & .socialmedia {
+
+            & .f-group {
+                margin-bottom: 0.5vw;
+
+                & label {
+                    width: 100%;
+
+                    display: inline-block;
+                    margin-bottom: 0;
+                    font-family: sans-serif;
+                    font-size: 1.2vw;
+                }
+
+                & input {
+                    width: 100%;
+                    height: 2.6vw;
+                    font-size: 1.25vw;
+
+                    margin-bottom: 1vw;
+
+                    display: block;
+                    padding: 0.4vw 0.4vw;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 0.05vw solid #ced4da;
+                    border-radius: 0.2vw;
+                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
+
+                & textarea {
+                    display: block;
+                    width: 100%;
+                    padding: 0.75vw 0.75vw;
+                    font-size: 1.25vw;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 0.05vw solid #ced4da;
+                    border-radius: 0.25vw;
+                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
             }
         }
     }

@@ -2,7 +2,7 @@
     <div class="content">
         <div class="body">
             <div class="components" v-if="selectedAction != null && selectedAction != 'dashboard'">
-                <div class="button">
+                <div class="button" :class="IsButtonShow != true ? 'hide' : ''">
                     <div class="question unselect" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
                 </div>
                 <Create v-if="IsCreateShow == true" :actionType="selectedAction" ></Create>
@@ -29,15 +29,20 @@ export default {
                 "designs": "Tasarım",
                 "bags": "Çanta",
                 "blogs": "Blog",
-                "manageSM": "SM",
+                "socialmedia": "Sosyal M.",
             },
-            index: 0,
+            IsButtonShow: true,
         }
+    },
+    mounted() {
+
     },
     methods: {
         showCreatePage() {
             this.IsCreateShow = true;
             this.IsIndexShow = false;
+
+            this.IsButtonShow = false;
         }
     },
     watch:  {
@@ -45,6 +50,7 @@ export default {
             if(nev != old) {
                 this.IsCreateShow = false;
                 this.IsIndexShow = true;
+                this.IsButtonShow = true;
             }
         }
     },
@@ -103,5 +109,9 @@ export default {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+    }
+
+    .hide {
+        display: none !important;
     }
 </style>
