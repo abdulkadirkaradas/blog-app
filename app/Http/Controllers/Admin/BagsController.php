@@ -72,19 +72,15 @@ class BagsController extends Controller
 
     public function getAllBags(Request $request)
     {
-        $bag = Topics::find($request->id);
-
-        foreach ($bag as $key => $value) {
-            $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $bag->id)->get();
-            $images = TopicImages::whereNull("deleted_at")->where("topic_id", $bag->id)->get();
-
-            $value->detail = $detail[0];
-            $value->image = $images[0];
+        $bags = Topics::whereNull("deleted_at")->where("flag", "bags")->get();
+        foreach ($bags as $key => $value) {
+            $value->detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+            $value->images = TopicImages::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
         }
 
         return [
             "status" => Response::$success,
-            "data" => $bag,
+            "data" => $bags,
         ];
     }
 

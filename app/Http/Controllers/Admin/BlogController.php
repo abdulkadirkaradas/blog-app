@@ -72,19 +72,16 @@ class BlogController extends Controller
 
     public function getAllBlogs(Request $request)
     {
-        $blog = Topics::find($request->id);
-
-        foreach ($blog as $key => $value) {
-            $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $blog->id)->get();
-            $images = TopicImages::whereNull("deleted_at")->where("topic_id", $blog->id)->get();
-
-            $value->detail = $detail[0];
-            $value->image = $images[0];
+        $blogs = Topics::whereNull("deleted_at")->where("flag", "blogs")->get();
+        foreach ($blogs as $key => $value) {
+            $value->detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+            $value->images = TopicImages::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
         }
+
 
         return [
             "status" => Response::$success,
-            "data" => $blog,
+            "data" => $blogs,
         ];
     }
 

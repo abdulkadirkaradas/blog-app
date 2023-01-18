@@ -71,14 +71,10 @@ class DesignsController extends Controller
 
     public function getAllDesigns(Request $request)
     {
-        $design = Topics::find($request->id);
-
+        $design = Topics::whereNull("deleted_at")->where("flag", "designs")->get();
         foreach ($design as $key => $value) {
-            $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $design->id)->get();
-            $images = TopicImages::whereNull("deleted_at")->where("topic_id", $design->id)->get();
-
-            $value->detail = $detail[0];
-            $value->image = $images[0];
+            $value->detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+            $value->images = TopicImages::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
         }
 
         return [

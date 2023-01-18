@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\DesignsController;
+use App\Http\Controllers\Admin\BagsController;
+use App\Http\Controllers\Admin\BlogController;
 use App\HTTP\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,18 +37,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/get-all-designs', [DesignsController::class, "getAllDesigns"]);
 
     // Bag Routes
-    Route::post('/store-bag', [DesignsController::class, "store"]);
-    Route::post('/update-bag', [DesignsController::class, "update"]);
-    Route::post('/delete-bag', [DesignsController::class, "delete"]);
-    Route::get('/find-bag', [DesignsController::class, "findBags"]);
-    Route::get('/get-all-bags', [DesignsController::class, "getAllBags"]);
+    Route::post('/store-bag', [BagsController::class, "store"]);
+    Route::post('/update-bag', [BagsController::class, "update"]);
+    Route::post('/delete-bag', [BagsController::class, "delete"]);
+    Route::get('/find-bag', [BagsController::class, "findBags"]);
+    Route::get('/get-all-bags', [BagsController::class, "getAllBags"]);
 
     // Blog Routes
-    Route::post('/store-blog', [DesignsController::class, "store"]);
-    Route::post('/update-blog', [DesignsController::class, "update"]);
-    Route::post('/delete-blog', [DesignsController::class, "delete"]);
-    Route::get('/find-blog', [DesignsController::class, "findBlog"]);
-    Route::get('/get-all-blogs', [DesignsController::class, "getAllBlogs"]);
+    Route::post('/store-blog', [BlogController::class, "store"]);
+    Route::post('/update-blog', [BlogController::class, "update"]);
+    Route::post('/delete-blog', [BlogController::class, "delete"]);
+    Route::get('/find-blog', [BlogController::class, "findBlog"]);
+    Route::get('/get-all-blogs', [BlogController::class, "getAllBlogs"]);
 
     // Social Media
     Route::post('/store-sm', [SocialMediaController::class, "store"]);
