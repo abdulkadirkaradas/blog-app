@@ -83,6 +83,8 @@ export default {
                     justify-content: center;
                     align-items: center;
                     display: flex;
+                    border-bottom: 0.05vw solid black;
+                    padding-bottom: 0.5vw;
 
                     & .question {
                         width: 10vw;

@@ -8,7 +8,7 @@
                     </div>
                     <!-- add flag -->
                     <div class="f-group-editor">
-                        <Editor api-key="8fmk9di8ca7dmkb3dz0kmjmv13q19k5qjnilymfnhk5jbwzj" :init="init"></Editor>
+                        <Editor :init="init"></Editor>
                     </div>
                 </div>
                 <div class="right">
