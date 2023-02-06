@@ -6,7 +6,7 @@
                     <div class="question unselect" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
                 </div>
                 <Create v-if="IsCreateShow == true" :actionType="selectedAction"></Create>
-                <Index v-if="IsIndexShow == true" :IsIndexShow="IsIndexShow" :actionType="selectedAction"></Index>
+                <Index v-if="IsIndexShow == true" :IsIndexShow="IsIndexShow" :actionType="selectedAction" @success="onSuccess"></Index>
             </div>
             <div class="dboard" v-if="selectedAction == 'dashboard'">
             </div>
@@ -32,6 +32,8 @@ export default {
                 "socialmedia": "Sosyal M.",
             },
             IsButtonShow: true,
+            indexActionType: null,
+            indexActionId: null,
         }
     },
     mounted() {
@@ -42,6 +44,10 @@ export default {
             this.IsCreateShow = true;
             this.IsIndexShow = false;
             this.IsButtonShow = false;
+        },
+        onSuccess({type, id}) {
+            this.indexActionType = type;
+            this.indexActionId = id;
         }
     },
     watch:  {
