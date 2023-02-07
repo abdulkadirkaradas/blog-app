@@ -6,7 +6,9 @@
                     <div class="question unselect" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
                 </div>
                 <Create v-if="IsCreateShow == true" :actionType="selectedAction"></Create>
-                <Index v-if="IsIndexShow == true" :IsIndexShow="IsIndexShow" :actionType="selectedAction" @success="onSuccess"></Index>
+                <Index v-if="IsIndexShow == true" :IsIndexShow="IsIndexShow" :actionType="selectedAction" @indexActionsStatus="indexActionsStatus"></Index>
+                <Show v-if="IsShowPageActive != false && IsShowPageActive != null" :id="indexActionId" :currentPage="selectedAction"></Show>
+                <Edit v-if="IsEditPageActive != false && IsEditPageActive != null" :id="indexActionId" :currentPage="selectedAction"></Edit>
             </div>
             <div class="dboard" v-if="selectedAction == 'dashboard'">
             </div>
@@ -17,6 +19,8 @@
 <script>
 import Create from './Topics/create.vue';
 import Index from './Topics/index.vue';
+import Show from './Topics/show.vue';
+import Edit from './Topics/edit.vue';
 export default {
     props: {
         selectedAction: null,
@@ -32,8 +36,10 @@ export default {
                 "socialmedia": "Sosyal M.",
             },
             IsButtonShow: true,
-            indexActionType: null,
+            // indexActionType: null,
             indexActionId: null,
+            IsShowPageActive: null,
+            IsEditPageActive: null,
         }
     },
     mounted() {
@@ -45,8 +51,10 @@ export default {
             this.IsIndexShow = false;
             this.IsButtonShow = false;
         },
-        onSuccess({type, id}) {
-            this.indexActionType = type;
+        indexActionsStatus({showPageStatus, editPageStatus,type, id}) {
+            this.IsShowPageActive = showPageStatus;
+            this.IsEditPageActive = editPageStatus;
+            // this.indexActionType = type;
             this.indexActionId = id;
         }
     },
@@ -56,11 +64,20 @@ export default {
                 this.IsCreateShow = false;
                 this.IsIndexShow = true;
                 this.IsButtonShow = true;
+                this.IsShowPageActive = false;
+                this.IsEditPageActive = false;
+            }
+        },
+        IsShowPageActive(nev, old) {
+            if((nev == true) || (old == true)) {
+                this.IsIndexShow = false;
+            } else {
+                this.IsIndexShow = true;
             }
         }
     },
     components: {
-        Create, Index
+        Create, Index, Show, Edit
     }
 }
 </script>

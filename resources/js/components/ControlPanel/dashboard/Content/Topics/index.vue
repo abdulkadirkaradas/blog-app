@@ -4,7 +4,7 @@
             <div class="topics" v-if="actionType != 'socialmedia'">
                 <div class="headers unselect">
                     <div class="section title">Görsel</div>
-                    <div class="section title">İsim</div>
+                    <div class="section title">Başlık</div>
                     <div class="section title">Detay</div>
                     <div class="action-title">İşlemler</div>
                 </div>
@@ -68,11 +68,17 @@ export default {
             });
         },
         runAction(type, id) {
-            var type = type == "show" ? "show" : (type == "edit" ? "edit" : "delete" );
-            this.$emit("success", {
-                type: type,
-                id: id
-            });
+            type = type == "show" ? "show" : (type == "edit" ? "edit" : "delete" );
+            if(type != "delete") {
+                let showPageStatus = type == "show" ? true : false;
+                let editPageStatus = type == "edit" ? true : false;
+                this.$emit("indexActionsStatus", {
+                    showPageStatus: showPageStatus,
+                    editPageStatus: editPageStatus,
+                    type: type,
+                    id: id
+                });
+            }
             // console.log(type, id);
         },
     },
