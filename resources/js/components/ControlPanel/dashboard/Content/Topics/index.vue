@@ -55,10 +55,10 @@ export default {
         }
     },
     mounted() {
-        this.getRecords();
+        this.init();
     },
     methods: {
-        getRecords() {
+        init() {
             var self = this;
             var type = this.actionType;
             type = type != 'socialmedia' ? type : 'sm';
@@ -85,7 +85,7 @@ export default {
     watch: {
         actionType(nev, old) {
             if(nev != old) {
-                this.getRecords();
+                this.init();
             }
         }
     }

@@ -24,10 +24,10 @@ export default {
         }
     },
     mounted() {
-        this.getRecord();
+        this.init();
     },
     methods: {
-        getRecord() {
+        init() {
             let self = this;
             let cPage = this.currentPage.slice(0, -1);
             axios.get(`/admin/find-` + cPage + `/` + self.id + ``).then(function(response) {
@@ -36,6 +36,8 @@ export default {
                 self.detail = response.data.data.detail[0];
                 self.image = response.data.data.images[0];
             });
+
+            this.$emit("backButtonStatus", true);
         }
     },
 }
