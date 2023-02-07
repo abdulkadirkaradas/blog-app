@@ -154,7 +154,7 @@ export default {
                     & .section {
                         border: 0.05vw solid black;
                         padding: 0.5vw;
-                        font-size: 1.3vw;
+                        font-size: 1vw;
                     }
 
                     & .actions {

@@ -5,7 +5,7 @@
             <div class="section image">
                 <img :src="image.file_url">
             </div>
-            <div class="section detail">{{ detail.detail }}</div>
+            <div class="section detail" v-html="detail.detail"></div>
         </div>
     </div>
 </template>
