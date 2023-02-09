@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title">Gülşah Karadaş</div>
+        <div class="title">Blog App</div>
     </div>
 </template>
 
