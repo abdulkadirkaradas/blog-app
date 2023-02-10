@@ -6,7 +6,7 @@
                     <div class="section create-button unselect" v-if="IsBackButtonEnable == false" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
                     <div class="section back-button unselect" v-else @click="onClickBackButton()">Geri Dön</div>
                 </div>
-                <Create v-if="IsCreateShow != false" :actionType="selectedAction"></Create>
+                <Create v-if="IsCreateShow != false" :actionType="selectedAction" @backButtonStatus="backButtonStatus"></Create>
                 <Index v-if="IsIndexShow != false" :IsIndexShow="IsIndexShow" :actionType="selectedAction" @indexActionsStatus="indexActionsStatus"></Index>
                 <Show v-if="IsShowPageActive != false" :id="indexActionId" :currentPage="selectedAction" @backButtonStatus="backButtonStatus"></Show>
                 <Edit v-if="IsEditPageActive != false" :id="indexActionId" :currentPage="selectedAction"></Edit>
@@ -50,7 +50,6 @@ export default {
         showCreatePage() {
             this.IsCreateShow = true;
             this.IsIndexShow = false;
-            this.IsButtonGroupEnable = false;
         },
         indexActionsStatus({showPageStatus, editPageStatus,type, id}) {
             this.IsShowPageActive = showPageStatus;
@@ -63,6 +62,7 @@ export default {
         },
         onClickBackButton() {
             this.IsIndexShow = true;
+            this.IsCreateShow = false;
             this.IsShowPageActive = false;
             this.IsEditPageActive = false;
             this.IsBackButtonEnable = false;

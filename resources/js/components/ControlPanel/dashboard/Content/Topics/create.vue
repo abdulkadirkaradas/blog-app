@@ -75,6 +75,8 @@ export default {
             $(".preview > img").remove();
             $(".preview").append("<img id='image-preview'>");
             $("#image-preview").attr("display", "none");
+
+            this.$emit("backButtonStatus", true);
         }
     },
     methods: {
