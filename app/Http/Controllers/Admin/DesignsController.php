@@ -88,15 +88,21 @@ class DesignsController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $design = Topics::find($id);
+        $design = Topics::find($request->id);
         if($design) {
             $design->delete();
-            $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $design->id)->delete();
-            $images = TopicImages::whereNull("deleted_at")->where("topic_id", $design->id)->delete();
+            TopicDetails::whereNull("deleted_at")->where("topic_id", $design->id)->delete();
+            TopicImages::whereNull("deleted_at")->where("topic_id", $design->id)->delete();
+
+            return [
+                "status" => Response::$success,
+            ];
         }
 
-        return back();
+        return [
+            "status" => Response::$fail,
+        ];
     }
 }

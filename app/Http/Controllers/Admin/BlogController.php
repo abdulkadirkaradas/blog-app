@@ -90,15 +90,21 @@ class BlogController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $blog = Topics::find($id);
+        $blog = Topics::find($request->id);
         if($blog) {
             $blog->delete();
             $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $blog->id)->delete();
             $images = TopicImages::whereNull("deleted_at")->where("topic_id", $blog->id)->delete();
+
+            return [
+                "status" => Response::$success,
+            ];
         }
 
-        return back();
+        return [
+            "status" => Response::$fail,
+        ];
     }
 }

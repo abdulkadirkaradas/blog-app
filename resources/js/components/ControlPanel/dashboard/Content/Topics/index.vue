@@ -8,7 +8,7 @@
                     <div class="section title">Detay</div>
                     <div class="action-title">İşlemler</div>
                 </div>
-                <div class="i-group" v-for="record in records" :id="record.id" :key="record.id">
+                <div class="index-i-group i-group" v-for="record in records" :id="record.id" :key="record.id">
                     <div class="section image">
                         <img v-if="record.images.file_url" :src="record.images.file_url">
                     </div>
@@ -52,6 +52,12 @@ export default {
     data() {
         return {
             records: null,
+            typesOfAction: {
+                "designs": "design",
+                "bags": "bag",
+                "blogs": "blog",
+                "socialmedia": "sm",
+            }
         }
     },
     mounted() {
@@ -78,6 +84,15 @@ export default {
                     type: type,
                     id: id
                 });
+            } else {
+                let act = this.typesOfAction[this.actionType];
+                if(confirm("Kaydı silmek istediğinize emin misiniz?")) {
+                    axios.post(`/admin/delete-` + act + `/` + id + ``).then(function(response) {
+                        if(response.data.status == "SUCCESS_0") {
+                            document.getElementById(`` + id + ``).remove();
+                        }
+                    });
+                }
             }
             // console.log(type, id);
         },

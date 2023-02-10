@@ -89,15 +89,21 @@ class BagsController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $bag = Topics::find($id);
+        $bag = Topics::find($request->id);
         if($bag) {
             $bag->delete();
             $detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $bag->id)->delete();
             $images = TopicImages::whereNull("deleted_at")->where("topic_id", $bag->id)->delete();
+
+            return [
+                "status" => Response::$success,
+            ];
         }
 
-        return back();
+        return [
+            "status" => Response::$fail,
+        ];
     }
 }

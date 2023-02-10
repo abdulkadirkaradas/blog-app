@@ -55,13 +55,19 @@ class SocialMediaController extends Controller
         ];
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $sm = SocialMedia::find($id);
+        $sm = SocialMedia::find($request->id);
         if($sm) {
             $sm->delete();
+
+            return [
+                "status" => Response::$success,
+            ];
         }
 
-        return back();
+        return [
+            "status" => Response::$fail,
+        ];
     }
 }
