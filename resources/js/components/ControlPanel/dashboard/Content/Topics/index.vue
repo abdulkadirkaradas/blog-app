@@ -188,9 +188,13 @@ export default {
 
                     & .image {
                         width: 40%;
+                        justify-content: center;
+                        align-items: center;
+                        display: flex;
 
                         & img {
-                            width: 100%;
+                            max-width: 100%;
+                            max-height: 20vw;
                         }
                     }
 
