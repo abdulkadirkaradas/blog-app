@@ -68,7 +68,7 @@ export default {
             var self = this;
             var type = this.actionType;
             type = type != 'socialmedia' ? type : 'sm';
-            axios.get(`/admin/get-all-` + type + ``).then(function(response) {
+            axios.get(`/admin/get-all-topics/` + type + ``).then(function(response) {
                 self.records = response.data.data;
                 // console.log(self.records);
             });
@@ -87,7 +87,7 @@ export default {
             } else {
                 let act = this.typesOfAction[this.actionType];
                 if(confirm("Kaydı silmek istediğinize emin misiniz?")) {
-                    axios.post(`/admin/delete-` + act + `/` + id + ``).then(function(response) {
+                    axios.post(`/admin/delete-topics/` + id + ``).then(function(response) {
                         if(response.data.status == "SUCCESS_0") {
                             document.getElementById(`` + id + ``).remove();
                         }

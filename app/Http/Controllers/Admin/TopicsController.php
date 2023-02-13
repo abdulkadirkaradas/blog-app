@@ -64,7 +64,7 @@ class TopicsController extends Controller
         return [
             "status" => Response::$success,
             "data" => [
-                "design" => $topic,
+                "topic" => $topic,
                 "detail" => $detail,
                 "images" => $images,
             ]
@@ -73,15 +73,21 @@ class TopicsController extends Controller
 
     public function getAllTopics(Request $request)
     {
-        $topic = Topics::whereNull("deleted_at")->where("flag", "designs")->get();
-        foreach ($topic as $key => $value) {
-            $value->detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
-            $value->images = TopicImages::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+        $topic = Topics::whereNull("deleted_at")->where("flag", $request->flag)->get();
+        if($topic) {
+            foreach ($topic as $key => $value) {
+                $value->detail = TopicDetails::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+                $value->images = TopicImages::whereNull("deleted_at")->where("topic_id", $value->id)->get()[0];
+            }
+
+            return [
+                "status" => Response::$success,
+                "data" => $topic,
+            ];
         }
 
         return [
-            "status" => Response::$success,
-            "data" => $topic,
+            "status" => Response::$fail,
         ];
     }
 

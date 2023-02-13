@@ -35,28 +35,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/update-topic/{id}', [TopicsController::class, "update"]);
     Route::post('/delete-topic/{id}', [TopicsController::class, "delete"]);
     Route::get('/find-topic/{id}', [TopicsController::class, "findTopic"]);
-    Route::get('/get-all-topics', [TopicsController::class, "getAllTopics"]);
-
-    // // Design Routes
-    // Route::post('/store-design', [DesignsController::class, "store"]);
-    // Route::post('/update-design/{id}', [DesignsController::class, "update"]);
-    // Route::post('/delete-design/{id}', [DesignsController::class, "delete"]);
-    // Route::get('/find-design/{id}', [DesignsController::class, "findDesign"]);
-    // Route::get('/get-all-designs', [DesignsController::class, "getAllDesigns"]);
-
-    // // Bag Routes
-    // Route::post('/store-bag', [BagsController::class, "store"]);
-    // Route::post('/update-bag/{id}', [BagsController::class, "update"]);
-    // Route::post('/delete-bag/{id}', [BagsController::class, "delete"]);
-    // Route::get('/find-bag/{id}', [BagsController::class, "findBag"]);
-    // Route::get('/get-all-bags', [BagsController::class, "getAllBags"]);
-
-    // // Blog Routes
-    // Route::post('/store-blog', [BlogController::class, "store"]);
-    // Route::post('/update-blog/{id}', [BlogController::class, "update"]);
-    // Route::post('/delete-blog/{id}', [BlogController::class, "delete"]);
-    // Route::get('/find-blog/{id}', [BlogController::class, "findBlog"]);
-    // Route::get('/get-all-blogs', [BlogController::class, "getAllBlogs"]);
+    Route::get('/get-all-topics/{flag}', [TopicsController::class, "getAllTopics"]);
 
     // Social Media
     Route::post('/store-sm', [SocialMediaController::class, "store"]);

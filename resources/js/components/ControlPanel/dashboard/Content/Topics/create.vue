@@ -98,7 +98,7 @@ export default {
             formData.append("detail", description);
             formData.append("image", this.file);
 
-            axios.post(`/admin/store-design`, formData).then(function(response) {
+            axios.post(`/admin/store-topic`, formData).then(function(response) {
                 // console.log(response);
                 $("#textEditor").val("");
                 $("input").val("");

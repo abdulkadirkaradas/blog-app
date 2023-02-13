@@ -29,10 +29,9 @@ export default {
     methods: {
         init() {
             let self = this;
-            let cPage = this.currentPage.slice(0, -1);
-            axios.get(`/admin/find-` + cPage + `/` + self.id + ``).then(function(response) {
+            axios.get(`/admin/find-topic/` + self.id + ``).then(function(response) {
                 // console.log(response.data.data);
-                self.topic = "design" in response.data.data ? response.data.data.design : ("bag" in response.data.data ? response.data.data.bag : response.data.data.blog);
+                self.topic = response.data.data.topic;
                 self.detail = response.data.data.detail[0];
                 self.image = response.data.data.images[0];
             });
