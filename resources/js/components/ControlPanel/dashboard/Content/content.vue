@@ -1,14 +1,14 @@
 <template>
     <div class="content" v-if="selectedAction != null">
         <div class="body">
+            <div class="button" :class="IsButtonGroupEnable != true ? 'hide' : ''">
+                <div class="section create-button unselect" v-if="IsBackButtonEnable == false" @click="showCreatePage()">Ekle</div>
+                <div class="section back-button unselect" v-else @click="onClickBackButton()">Geri Dön</div>
+            </div>
             <div class="content-management" v-if="selectedAction == 'contentMgmt'">
-
+                <ContentMgmtIndex></ContentMgmtIndex>
             </div>
             <div class="content-actions" v-else-if="selectedAction != 'contentMgmt' && selectedAction != 'dashboard'">
-                <div class="button" :class="IsButtonGroupEnable != true ? 'hide' : ''">
-                    <div class="section create-button unselect" v-if="IsBackButtonEnable == false" @click="showCreatePage()">Ekle</div>
-                    <div class="section back-button unselect" v-else @click="onClickBackButton()">Geri Dön</div>
-                </div>
                 <Create v-if="IsCreateShow != false" :actionType="selectedAction" @backButtonStatus="backButtonStatus"></Create>
                 <Index v-if="IsIndexShow != false" :IsIndexShow="IsIndexShow" :actionType="selectedAction" @indexActionsStatus="indexActionsStatus"></Index>
                 <Show v-if="IsShowPageActive != false" :id="indexActionId" :currentPage="selectedAction" @backButtonStatus="backButtonStatus"></Show>
@@ -21,6 +21,10 @@
 </template>
 
 <script>
+// ContentMgmt Imports
+import ContentMgmtIndex from './ContentMgmt/index.vue';
+
+// Topic Imports
 import Create from './Topics/create.vue';
 import Index from './Topics/index.vue';
 import Show from './Topics/show.vue';
@@ -83,7 +87,11 @@ export default {
         }
     },
     components: {
-        Create, Index, Show, Edit
+        ContentMgmtIndex,
+        Create,
+        Index,
+        Show,
+        Edit,
     }
 }
 </script>
@@ -105,30 +113,27 @@ export default {
             display: flex;
             flex-direction: column;
 
-            & .content-actions {
+            & .button {
+                margin-bottom: 1vw;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                border-bottom: 0.05vw solid black;
+                padding-bottom: 0.5vw;
 
-                & .button {
-                    margin-bottom: 1vw;
+                & .section {
+                    width: 10vw;
+                    height: 2.5vw;
+                    font-size: 1.3vw;
+                    cursor: pointer;
+
+                    background-color: #00000005;
+                    border: 0.1vw solid #00000020;
+                    border-radius: 0.7vw;
+
                     justify-content: center;
                     align-items: center;
                     display: flex;
-                    border-bottom: 0.05vw solid black;
-                    padding-bottom: 0.5vw;
-
-                    & .section {
-                        width: 10vw;
-                        height: 2.5vw;
-                        font-size: 1.3vw;
-                        cursor: pointer;
-
-                        background-color: #00000005;
-                        border: 0.1vw solid #00000020;
-                        border-radius: 0.7vw;
-
-                        justify-content: center;
-                        align-items: center;
-                        display: flex;
-                    }
                 }
             }
         }
