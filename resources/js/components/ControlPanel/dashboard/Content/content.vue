@@ -1,9 +1,12 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="selectedAction != null">
         <div class="body">
-            <div class="components" v-if="selectedAction != null && selectedAction != 'dashboard'">
+            <div class="content-management" v-if="selectedAction == 'contentMgmt'">
+
+            </div>
+            <div class="content-actions" v-else-if="selectedAction != 'contentMgmt' && selectedAction != 'dashboard'">
                 <div class="button" :class="IsButtonGroupEnable != true ? 'hide' : ''">
-                    <div class="section create-button unselect" v-if="IsBackButtonEnable == false" v-on:click="showCreatePage()">{{ nameArray[selectedAction] }} Ekle</div>
+                    <div class="section create-button unselect" v-if="IsBackButtonEnable == false" @click="showCreatePage()">Ekle</div>
                     <div class="section back-button unselect" v-else @click="onClickBackButton()">Geri Dön</div>
                 </div>
                 <Create v-if="IsCreateShow != false" :actionType="selectedAction" @backButtonStatus="backButtonStatus"></Create>
@@ -35,12 +38,6 @@ export default {
             indexActionId: null,
             IsShowPageActive: false,
             IsEditPageActive: false,
-            nameArray: {
-                "designs": "Tasarım",
-                "bags": "Çanta",
-                "blogs": "Blog",
-                "socialmedia": "Sosyal M.",
-            },
         }
     },
     mounted() {
@@ -54,7 +51,6 @@ export default {
         indexActionsStatus({showPageStatus, editPageStatus,type, id}) {
             this.IsShowPageActive = showPageStatus;
             this.IsEditPageActive = editPageStatus;
-            // this.indexActionType = type;
             this.indexActionId = id;
         },
         backButtonStatus(val) {
@@ -109,7 +105,7 @@ export default {
             display: flex;
             flex-direction: column;
 
-            & .components {
+            & .content-actions {
 
                 & .button {
                     margin-bottom: 1vw;

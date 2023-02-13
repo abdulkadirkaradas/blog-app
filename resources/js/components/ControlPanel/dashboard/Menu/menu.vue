@@ -1,7 +1,7 @@
 <template>
     <div class="menu-content">
-        <div class="item-header unselect">Tasarımlarım</div>
-        <div class="item unselect" @click="getAction('designs')">Tasarım İşlemleri</div>
+        <div class="item-header unselect">İçerik Yönetimi</div>
+        <div class="item unselect" @click="getAction('contentMgmt')">İçerik Ekle</div>
         <!-- <div class="item-header unselect">Tasarımlarım</div>
         <div class="item unselect" @click="getAction('designs')">Tasarım İşlemleri</div>
         <div class="item-header unselect">Çantalarım</div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContentsController;
 use App\Http\Controllers\Admin\SocialMediaController;
 // use App\Http\Controllers\Admin\DesignsController;
 // use App\Http\Controllers\Admin\BagsController;
@@ -29,6 +30,13 @@ Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function() {
     Route::get("/", [HomeController::class, 'index'])->name("home");
+
+    //Content Routes
+    Route::post('/store-content', [ContentsController::class, "store"]);
+    Route::post('/update-content/{id}', [ContentsController::class, "update"]);
+    Route::post('/delete-content/{id}', [ContentsController::class, "delete"]);
+    Route::get('/find-content/{id}', [ContentsController::class, "findContent"]);
+    Route::get('/get-all-contents', [ContentsController::class, "getAllContents"]);
 
     //Topic Routes
     Route::post('/store-topic', [TopicsController::class, "store"]);
