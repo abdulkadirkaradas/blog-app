@@ -2,12 +2,14 @@
     <div class="menu-content">
         <div class="item-header unselect">Tasarımlarım</div>
         <div class="item unselect" @click="getAction('designs')">Tasarım İşlemleri</div>
+        <!-- <div class="item-header unselect">Tasarımlarım</div>
+        <div class="item unselect" @click="getAction('designs')">Tasarım İşlemleri</div>
         <div class="item-header unselect">Çantalarım</div>
         <div class="item unselect" @click="getAction('bags')">Çanta İşlemleri</div>
         <div class="item-header unselect">Bloglarım</div>
         <div class="item unselect" @click="getAction('blogs')">Blog İşlemleri</div>
         <div class="item-header unselect">Sosyal Medya</div>
-        <div class="item unselect" @click="getAction('socialmedia')">SM Yönetimi</div>
+        <div class="item unselect" @click="getAction('socialmedia')">SM Yönetimi</div> -->
         <div class="item-header dashboard unselect" @click="getAction('dashboard')">Dashboard</div>
     </div>
 </template>
