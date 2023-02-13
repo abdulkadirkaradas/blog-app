@@ -8,7 +8,7 @@
                     </div>
                     <!-- add flag -->
                     <div class="f-group-editor">
-                        <Editor :init="init"></Editor>
+                        <textarea class="textarea" id="textEditor"></textarea>
                     </div>
                 </div>
                 <div class="right">
@@ -47,21 +47,10 @@
 
 <script>
 import $ from "jquery";
-import Editor from '@tinymce/tinymce-vue';
-import tinymce from "tinymce";
+
 export default {
     props: {
         actionType: null,
-        init: {
-            plugins: {
-                type: [String, Array],
-                default: 'quickbars emoticons table',
-            },
-            toolbar: {
-                type: [String, Array],
-                default: ' bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify|bullist numlist |outdent indent blockquote | undo redo | axupimgs | removeformat | table | emoticons',
-            },
-        }
     },
     data() {
         return {
@@ -70,7 +59,7 @@ export default {
     },
     mounted() {
         if(this.actionType != "socialmedia") {
-            tinymce.activeEditor.setContent("");
+            $("#textEditor").val("");
             $("input").val("");
             $(".preview > img").remove();
             $(".preview").append("<img id='image-preview'>");
@@ -101,7 +90,7 @@ export default {
         serializeForm() {
             var name = document.getElementById("name").value;
             var flag = this.actionType;
-            var description = tinymce.activeEditor.getContent();
+            var description = $("#textEditor").val();
 
             let formData = new FormData();
             formData.append("name", name);
@@ -111,7 +100,7 @@ export default {
 
             axios.post(`/admin/store-design`, formData).then(function(response) {
                 // console.log(response);
-                tinymce.activeEditor.setContent("");
+                $("#textEditor").val("");
                 $("input").val("");
                 $(".preview > img").remove();
                 $(".preview").append("<img id='image-preview'>");
@@ -136,7 +125,6 @@ export default {
         }
     },
     components: {
-        Editor
     }
 }
 </script>
@@ -180,6 +168,15 @@ export default {
                         border: 0.05vw solid #ced4da;
                         border-radius: 0.2vw;
                         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                    }
+                }
+
+                & .f-group-editor {
+
+                    & textarea {
+                        width: 100%;
+                        height: 25vh;
+                        border: 0.1vw solid #d2d4d2;
                     }
                 }
             }
