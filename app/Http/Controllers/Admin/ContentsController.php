@@ -27,7 +27,8 @@ class ContentsController extends Controller
         $content = Contents::find($request->id);
 
         return [
-            "status" => $content
+            "status" => Response::$success,
+            "data" => $content,
         ];
     }
 
@@ -36,7 +37,8 @@ class ContentsController extends Controller
         $contents = Contents::all();
 
         return [
-            "status" => $contents
+            "status" => Response::$success,
+            "data" => $contents,
         ];
     }
 
@@ -55,7 +57,7 @@ class ContentsController extends Controller
     public function delete(Request $request)
     {
         $content = Contents::find($request->id);
-        if($content) {
+        if ($content) {
             $content->delete();
 
             return [
